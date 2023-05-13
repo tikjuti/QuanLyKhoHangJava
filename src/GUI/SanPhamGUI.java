@@ -5,14 +5,15 @@ import BUS.SanPhamBUS;
 import DTO.LoaiSanPham;
 import DTO.SanPham;
 import MyCustom.XuLyFileExcel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-//import java.text.DecimalFormat;
+import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-//import java.util.Vector;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 
 public class SanPhamGUI extends javax.swing.JPanel {
@@ -29,6 +30,8 @@ public class SanPhamGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -60,6 +63,19 @@ public class SanPhamGUI extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -77,9 +93,14 @@ public class SanPhamGUI extends javax.swing.JPanel {
         });
 
         btnAdd.setBackground(new java.awt.Color(204, 204, 204));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-icon.png"))); // NOI18N
         btnAdd.setText("Thêm");
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddMouseClicked(evt);
+            }
+        });
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -87,9 +108,14 @@ public class SanPhamGUI extends javax.swing.JPanel {
         });
 
         btnEdit.setBackground(new java.awt.Color(204, 204, 204));
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
         btnEdit.setText("Lưu");
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -97,9 +123,14 @@ public class SanPhamGUI extends javax.swing.JPanel {
         });
 
         btnDelete.setBackground(new java.awt.Color(204, 204, 204));
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete-icon.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -107,7 +138,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
         });
 
         btnInput.setBackground(new java.awt.Color(204, 204, 204));
-        btnInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnInput.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/excel-icon.png"))); // NOI18N
         btnInput.setText("Nhập");
         btnInput.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,7 +153,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
         });
 
         btnOutput.setBackground(new java.awt.Color(204, 204, 204));
-        btnOutput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnOutput.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnOutput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/excel-icon.png"))); // NOI18N
         btnOutput.setText("Xuất");
         btnOutput.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,8 +162,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
             }
         });
 
-        tableSP.setBackground(new java.awt.Color(247, 247, 247));
-        tableSP.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tableSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -157,8 +187,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tableSP);
 
-        btnSearch.setBackground(new java.awt.Color(204, 204, 204));
-        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Search-icon.png"))); // NOI18N
         btnSearch.setText("Tìm kiếm");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +197,8 @@ public class SanPhamGUI extends javax.swing.JPanel {
         });
 
         btnReset.setBackground(new java.awt.Color(204, 204, 204));
-        btnReset.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh-icon.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -197,7 +227,6 @@ public class SanPhamGUI extends javax.swing.JPanel {
             }
         });
 
-        btnLoc.setBackground(new java.awt.Color(204, 204, 204));
         btnLoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLoc.setText("Lọc");
         btnLoc.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -205,6 +234,8 @@ public class SanPhamGUI extends javax.swing.JPanel {
                 btnLocMouseClicked(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Mã sản phẩm");
@@ -259,7 +290,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
                         .addGap(127, 127, 127)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                        .addComponent(txtSoLuong))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -308,7 +339,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -398,15 +429,15 @@ public class SanPhamGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnInputActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        xuLyThemSanPham();
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        xuLySuaSanPham();
+
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        xuLyXoaSanPham();
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
@@ -438,7 +469,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbLoaiActionPerformed
 
     private void cmbLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbLoaiMouseClicked
-        xuLyThemLoai();
+
     }//GEN-LAST:event_cmbLoaiMouseClicked
 
     private void txtGiaDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaDenActionPerformed
@@ -452,7 +483,33 @@ public class SanPhamGUI extends javax.swing.JPanel {
     private void btnLocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLocMouseClicked
         xuLyTimKiem2();
     }//GEN-LAST:event_btnLocMouseClicked
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        xuLyThemSanPham();
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        xuLySuaSanPham();
+    }//GEN-LAST:event_btnEditMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        xuLyXoaSanPham();
+    }//GEN-LAST:event_btnDeleteMouseClicked
     
+    
+    DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+    private JTable setMyTable() {
+        rightRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+        tableSP.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+        tableSP.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
+        tableSP.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+        tableSP.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+        tableSP.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+        tableSP.setRowHeight(20);
+        JTableHeader header = tableSP.getTableHeader();
+        header.setBackground(new Color(242, 153, 74));
+        return tableSP;
+    }
    
     private void loadDataCmbLoai() {
         cmbLoai.removeAllItems();
@@ -462,24 +519,14 @@ public class SanPhamGUI extends javax.swing.JPanel {
         for (LoaiSanPham loai : dsl) {
             cmbLoai.addItem(loai.getMaLoai() + " - " + loai.getTenLoai());
         }
-        cmbLoai.addItem("Khác...");
     }
     private void loadDataCmbLoai2() {
         cmbLoai2.removeAllItems();
-
+        
+        cmbLoai2.addItem("0 - Tất cả");
         ArrayList<LoaiSanPham> dsl = loaiBUS.getDanhSachLoai();
         for (LoaiSanPham loai : dsl) {
             cmbLoai2.addItem(loai.getMaLoai() + " - " + loai.getTenLoai());
-        }
-    }
-
-    private void xuLyThemLoai() {
-        int x = cmbLoai.getSelectedIndex();
-        if (x == cmbLoai.getItemCount() - 1) {
-            DlgLoaiSanPhamGUI loaiGUI = new DlgLoaiSanPhamGUI();
-            loaiGUI.setVisible(true);
-            loadDataCmbLoai();
-            loadDataCmbLoai2();
         }
     }
     
@@ -490,8 +537,8 @@ public class SanPhamGUI extends javax.swing.JPanel {
         txtGiaSP.setText("");
         txtSoLuong.setText("");
         cmbLoai.setSelectedIndex(0);
-//        loadDataCmbLoai();
-//        loadDataCmbLoai2();
+        loadDataCmbLoai();
+        loadDataCmbLoai2();
         loadDataLenBangSanPham();
     }
     
@@ -524,10 +571,10 @@ public class SanPhamGUI extends javax.swing.JPanel {
     
     private void loadDataLenBangSanPham() {
         spBUS.docListSanPham();
-        dtmSanPham = (DefaultTableModel) tableSP.getModel();
+        dtmSanPham = (DefaultTableModel) setMyTable().getModel();
         dtmSanPham.setRowCount(0);
         ArrayList<SanPham> dssp = spBUS.getListSanPham();
-//        DecimalFormat dcf = new DecimalFormat("###,###");
+        DecimalFormat dcf = new DecimalFormat("###,###");
 
         Object obj[] = new Object[5];
         for (SanPham sp : dssp) {
@@ -536,7 +583,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
             obj[1] = tenLoai;
             obj[2] = sp.getTenSP();
             obj[3] = sp.getSoLuong();
-            obj[4] = sp.getGiaSP();
+            obj[4] = dcf.format(sp.getGiaSP());
             dtmSanPham.addRow(obj);
         }
     }
@@ -580,7 +627,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
         ArrayList<SanPham> dssp = spBUS.getSanPhamTheoTen(ten);
         dtmSanPham = (DefaultTableModel) tableSP.getModel();
         dtmSanPham.setRowCount(0);
-//        DecimalFormat dcf = new DecimalFormat("###,###");
+        DecimalFormat dcf = new DecimalFormat("###,###");
 
         Object obj[] = new Object[5];
         for (SanPham sp : dssp) {
@@ -588,7 +635,7 @@ public class SanPhamGUI extends javax.swing.JPanel {
                 obj[1] = sp.getMaLoai();
                 obj[2] = sp.getTenSP();
                 obj[3] = sp.getSoLuong();
-                obj[4] = sp.getGiaSP();
+                obj[4] = dcf.format(sp.getGiaSP());
                 dtmSanPham.addRow(obj);
         }
     }
@@ -597,25 +644,30 @@ public class SanPhamGUI extends javax.swing.JPanel {
         String Loai = cmbLoai2.getSelectedItem().toString();
         String[] loaiTmp = Loai.split(" - ");
         String maLoai = loaiTmp[0];
-        ArrayList<SanPham> dssp = spBUS.getSanPhamTheoLoai(maLoai);
+        ArrayList<SanPham> dssp;
+        if (Integer.parseInt(maLoai) != 0) {
+        dssp = spBUS.getSanPhamTheoLoai(maLoai);
+        }
+        else 
+            dssp = spBUS.getListSanPham();
         dtmSanPham = (DefaultTableModel) tableSP.getModel();
         dtmSanPham.setRowCount(0);
-//        DecimalFormat dcf = new DecimalFormat("###,###");
+        DecimalFormat dcf = new DecimalFormat("###,###");
 
         Object obj[] = new Object[5];
         for (SanPham sp : dssp) {
             if (!txtGiaTu.getText().equals("") || !txtGiaDen.getText().equals("")) {
                 if (sp.getGiaSP() >= Float.parseFloat(txtGiaTu.getText()) && sp.getGiaSP() <= Float.parseFloat(txtGiaDen.getText())) {
                     obj[0] = sp.getMaSP();
-                    obj[1] = Loai;
+                    obj[1] = sp.getMaLoai();
                     obj[2] = sp.getTenSP();
                     obj[3] = sp.getSoLuong();
-                    obj[4] = sp.getGiaSP();
+                    obj[4] = dcf.format(sp.getGiaSP());
                     dtmSanPham.addRow(obj);
                 }
             } else {
                 obj[0] = sp.getMaSP();
-                obj[1] = Loai;
+                obj[1] = sp.getMaLoai();
                 obj[2] = sp.getTenSP();
                 obj[3] = sp.getSoLuong();
                 obj[4] = sp.getGiaSP();
@@ -625,26 +677,28 @@ public class SanPhamGUI extends javax.swing.JPanel {
     }
     
      private void xuLyNhapFileExcel() {
-        int  n = JOptionPane.showConfirmDialog(this, "Dữ liệu cũ sẽ bị xóa, chắc chưa?", "", JOptionPane.YES_NO_OPTION);
-        if (n != JOptionPane.OK_OPTION) {
-            return;
-        }
-        dtmSanPham = (DefaultTableModel) tableSP.getModel();
-        JTable tblSanPham = new JTable(dtmSanPham);
-        
-        XuLyFileExcel nhapFile = new XuLyFileExcel();
-        nhapFile.nhapExcel(tblSanPham);
-        
-        int row = tblSanPham.getRowCount();
-        for (int i = 0; i < row; i++) {
-            String loai = tblSanPham.getValueAt(i, 1) + "";
-            String ten = tblSanPham.getValueAt(i, 2) + "";
-            String soLuong = tblSanPham.getValueAt(i, 3) + "";
-            String donGia = tblSanPham.getValueAt(i, 4) + "";
-            String status = tblSanPham.getValueAt(i, 5) + "";
+        int  n = JOptionPane.showConfirmDialog(this, "Bạn có muốn nhập mới hết không?", "", JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.OK_OPTION) {
+            spBUS.xoaAllSanPham();
+        } else 
+        if (n == JOptionPane.NO_OPTION) {
+            dtmSanPham = (DefaultTableModel) tableSP.getModel();
+            JTable tblSanPham = new JTable(dtmSanPham);
 
-            spBUS.nhapSanPhamTuExcel(ten, loai, soLuong, donGia, status);
-        }
+            XuLyFileExcel nhapFile = new XuLyFileExcel();
+            nhapFile.nhapExcel(tblSanPham);
+            SanPhamBUS spBUSNew = new SanPhamBUS();
+            int row = dtmSanPham.getRowCount();
+            for (int i = 0; i < row; i++) {
+                String loai = dtmSanPham.getValueAt(i, 1) + "";
+                String ten = dtmSanPham.getValueAt(i, 2) + "";
+                String soLuong = dtmSanPham.getValueAt(i, 3) + "";
+                String donGia = dtmSanPham.getValueAt(i, 4) + "";
+
+                spBUSNew.nhapSanPhamTuExcel(ten, loai, soLuong, donGia);
+
+            }
+        } 
     }
     
     private void xuLyXuatFileExcel() {
@@ -678,6 +732,8 @@ public class SanPhamGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable tableSP;
     private javax.swing.JTextField txtGiaDen;
     private javax.swing.JTextField txtGiaSP;

@@ -26,6 +26,15 @@ public class SanPhamBUS {
         return listSanPham;
     }
     
+    public String getTenSP(int maSP) {
+        for (SanPham sp : listSanPham) {
+            if (sp.getMaSP() == maSP) {
+                return sp.getTenSP();
+            }
+        }
+        return "";
+    }
+    
     public ArrayList<SanPham> getSanPhamTheoTen(String ten) {
         ArrayList<SanPham> dssp = new ArrayList<>();
         for (SanPham sp : getListSanPham()) {
@@ -53,22 +62,27 @@ public class SanPhamBUS {
         return null;
     }
     
+    public boolean xoaAllSanPham() {
+        try {
+            spDAO.xoaAllSanPhamTu();
+        } catch (NumberFormatException e) {
+        }
+        return false;
+    }
+    
     public boolean nhapSanPhamTuExcel(String ten,
             String loai,
             String soLuong,
-            String donGia,
-            String status) {
+            String donGia) {
 
         try {
             String[] loaiTmp = loai.split(" - ");
             int maLoai = Integer.parseInt(loaiTmp[0]);
-            int soLuongSP = Integer.parseInt(soLuong);
+            int soLuongSP =(int) Float.parseFloat(soLuong);
             donGia = donGia.replace(",", "");
             float donGiaSP = Float.parseFloat(donGia);
-            
             boolean statusSP;
-            statusSP = !status.trim().equals("") || status.trim().equals("Đã xóa") || status.trim().equals("Xóa"); 
-
+            statusSP = false; 
             SanPham sp = new SanPham();
             sp.setTenSP(ten);
             sp.setMaLoai(maLoai);
@@ -76,7 +90,8 @@ public class SanPhamBUS {
             sp.setGiaSP(donGiaSP);
             sp.setIsDeleted(statusSP);
 
-            spDAO.nhapSanPhamTuExcel(sp);
+            spDAO.themSanPham(sp);
+            return true;
         } catch (NumberFormatException e) {
         }
         return false;

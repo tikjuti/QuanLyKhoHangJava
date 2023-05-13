@@ -1,14 +1,12 @@
 
 package Main;
 
-import DAO.Connect;
+
+import GUI.LoginFrame.LoginGUI;
 
 public class Main {
     public static void main(String[] args) {
-        new Connect();
-
-//        changLNF("Nimbus");
-//        DangNhapGUI login = new DangNhapGUI();
-//        login.showWindow();
-    }
+        new LoginGUI().setVisible(true);
+        }
 }
+

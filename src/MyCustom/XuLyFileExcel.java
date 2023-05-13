@@ -108,53 +108,32 @@ public class XuLyFileExcel {
 
             if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File fileSelected = chooser.getSelectedFile();
-                FileInputStream fis = new FileInputStream(fileSelected);
-                BufferedInputStream bis = new BufferedInputStream(fis);
-
-                XSSFWorkbook wb = new XSSFWorkbook(bis);
-                XSSFSheet sheet = wb.getSheetAt(0);
-                 
-//                DefaultTableModel dtmtbl = (DefaultTableModel) dtm;
-//                dtmtbl.setRowCount(0);
-//                for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-//                    Row row = sheet.getRow(i);
-//                    Vector vec = new Vector();
-//                    for (int j = 0; j < row.getLastCellNum(); j++) {
-//                        if (dtmtbl.getColumnCount() != row.getLastCellNum()) {
-//                            JOptionPane.showMessageDialog(null, "Nhập file thất bại xlf", "", JOptionPane.ERROR_MESSAGE);
-//                            return;
-//                        }
-//                        Cell cell = row.getCell(j);
-//                        vec.add(cell.getStringCellValue());
-//                    }
-//                    dtmtbl.addRow(vec);
-//                }
-//                JOptionPane.showMessageDialog(null, "Nhập file thành công! XL");
+                try (FileInputStream fis = new FileInputStream(fileSelected)) {
+                    BufferedInputStream bis = new BufferedInputStream(fis);
+                    
+                    XSSFWorkbook wb = new XSSFWorkbook(bis);
+                    XSSFSheet sheet = wb.getSheetAt(0);
+                    
                 DefaultTableModel dtmtbl = (DefaultTableModel) dtm;
                 dtmtbl.setRowCount(0);
-                for (Row row : sheet) {
-//                    Row row = sheet.getRow(i);
+                for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                    Row row = sheet.getRow(i);
                     Vector vec = new Vector();
                     for (Cell cell : row) {
-////                        if (dtmtbl.getColumnCount() != row.getLastCellNum()) {
-////                            JOptionPane.showMessageDialog(null, "Nhập file thất bại xlf", "", JOptionPane.ERROR_MESSAGE);
-////                            return;
-////                        }
-////                        Cell cell = row.getCell(j);
-                        switch (cell.getCellType()) {
+                    switch (cell.getCellType()) {
                         case STRING -> vec.add(cell.getStringCellValue());
                         case NUMERIC -> vec.add(cell.getNumericCellValue());
                         case BOOLEAN -> vec.add(cell.getBooleanCellValue());
                         default -> vec.add("");
-                        }
+                    }
                     }
                     dtmtbl.addRow(vec);
+                    }
                 }
-                fis.close();
-                JOptionPane.showMessageDialog(null, "Nhập file thành công! XL");
+                JOptionPane.showMessageDialog(null, "Nhập file thành công!");
             }
         } catch (HeadlessException | IOException e) {
-            JOptionPane.showMessageDialog(null, "Nhập file thất bại Xl", "", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nhập file thất bại", "", JOptionPane.ERROR_MESSAGE);
         }
     }
 

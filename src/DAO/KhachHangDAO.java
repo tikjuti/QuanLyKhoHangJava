@@ -113,4 +113,14 @@ public class KhachHangDAO {
         }
         return false;
     }
+    public boolean xoaAllKhachHang() {
+        try {
+            String sql = "DELETE FROM khachhang";
+            PreparedStatement pre = Connect.cnt().prepareStatement(sql);            
+            pre.execute();
+            return true;
+        } catch (SQLException e) {
+        }
+        return false;
+    }
 }

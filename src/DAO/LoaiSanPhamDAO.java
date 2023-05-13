@@ -76,13 +76,10 @@ public class LoaiSanPhamDAO {
         return false;
     }
     
-    public boolean nhapSanPhamTuExcel(LoaiSanPham sp) {
+    public boolean xoaAllSanPhamTu() {
         try {
-            String sql = "UPDATE loaisanpham SET IsDeleted=1; INSERT INTO loaisanpham(MaLoai, TenLoai, IsDeleted) VALUES (?, ?, 1)";
-            PreparedStatement pre = Connect.cnt().prepareStatement(sql);
-            pre.setInt(1, sp.getMaLoai());
-            pre.setString(2, sp.getTenLoai());
-       
+            String sql = "DELETE FROM loaisanpham";
+            PreparedStatement pre = Connect.cnt().prepareStatement(sql);            
             pre.execute();
             return true;
         } catch (SQLException e) {

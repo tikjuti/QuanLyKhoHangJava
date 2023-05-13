@@ -128,22 +128,27 @@ public class LoaiSanPhamBUS {
         return false;
     }
     
-    public boolean nhapSanPhamTuExcel(String ma, String ten) {
-
+     public boolean xoaAllSanPham() {
         try {
-            LoaiSanPham sp = new LoaiSanPham();
-            sp.setMaLoai(Integer.parseInt(ma));
-            sp.setTenLoai(ten);
-            
-            if (loaiDAO.nhapSanPhamTuExcel(sp)) {
-                JOptionPane.showMessageDialog(null, "Nhập file thành công! Bus");
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Nhập file thất bại Bus", "", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
+            loaiDAO.xoaAllSanPhamTu();
         } catch (NumberFormatException e) {
         }
         return false;
     }
+     public boolean nhapSanPhamTuExcel(String ten) {
+
+        try {
+            boolean statusSP;
+            statusSP = false; 
+            LoaiSanPham sp = new LoaiSanPham();
+            sp.setTenLoai(ten);
+            sp.setIsDeleted(statusSP);
+
+            loaiDAO.themLoai(sp);
+            return true;
+        } catch (NumberFormatException e) {
+        }
+        return false;
+    }
+    
 }

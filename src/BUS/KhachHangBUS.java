@@ -97,7 +97,7 @@ public class KhachHangBUS {
 
     public boolean suaKhachHang(String maKH, String tenKH, String gioiTinh, String diaChi, String dienThoai, String email) {
         if (tenKH.trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Vui lòng điền tên nhà cung cấp!", "", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Vui lòng điền tên khách hàng!", "", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (gioiTinh.trim().equals("")) {
@@ -156,6 +156,39 @@ public class KhachHangBUS {
         }
 
         JOptionPane.showMessageDialog(null, "Xóa khách hàng thất bại", "", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    public boolean xoaAllKhachHang() {
+        try {
+            khachHangDAO.xoaAllKhachHang();
+        } catch (NumberFormatException e) {
+        }
+        return false;
+    }
+    
+    public boolean nhapKhachHangTuExcel(String ten, String gioitinh,
+            String sdt,
+            String diachi,
+            String email) {
+
+        try {
+            boolean statusSP;
+            statusSP = false; 
+            boolean gt ;
+            gt = gioitinh.trim().equals("Nam");
+            KhachHang sp = new KhachHang();
+            sp.setTenKH(ten);
+            sp.setGioiTinh(gt);
+            sp.setDienThoai(sdt);
+            sp.setDiaChi(diachi);
+            sp.setEmail(email);
+            sp.setIsDeleted(statusSP);
+
+            khachHangDAO.addKH(sp);
+            return true;
+        } catch (NumberFormatException e) {
+        }
         return false;
     }
 }

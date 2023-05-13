@@ -99,9 +99,19 @@ public class SanPhamDAO {
 
     }
     
+    public boolean xoaAllSanPhamTu() {
+        try {
+            String sql = "DELETE FROM sanpham";
+            PreparedStatement pre = Connect.cnt().prepareStatement(sql);            
+            pre.execute();
+            return true;
+        } catch (SQLException e) {
+        }
+        return false;
+    }
     public boolean nhapSanPhamTuExcel(SanPham sp) {
         try {
-            String sql = "DELETE FROM sanpham; INSERT INTO sanpham(MaLoai, TenSP, SoLuong, GiaSP, IsDeleted) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO sanpham(MaLoai, TenSP, SoLuong, GiaSP, IsDeleted) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pre = Connect.cnt().prepareStatement(sql);
             pre.setInt(1, sp.getMaLoai());
             pre.setString(2, sp.getTenSP());
@@ -162,5 +172,49 @@ public class SanPhamDAO {
         } catch (SQLException e) {
         }
         return false;
+    }
+    
+    public static int getIDSP(String tensp){
+        int id;
+      
+//        ResultSet rs = dalSanPham.GetMaSP(tensp);
+        try {
+              String sql = "Select MaSP from sanpham where TenSP='"+tensp+"'";
+              PreparedStatement pre = Connect.cnt().prepareStatement(sql);
+              ResultSet rs = pre.executeQuery();
+            if(rs.next()){
+                id=rs.getInt("MaSP");
+                
+                return id;
+            }
+        } catch (SQLException e) {
+            
+        }
+        return 0;
+    }
+    
+    public static SanPham getSanPham2(String ma) {
+        try {
+            String sql = "SELECT *FROM sanpham WHERE MaSP=?";
+            PreparedStatement pre = Connect.cnt().prepareStatement(sql);
+            pre.setString(1, ma);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                SanPham sp = new SanPham();
+
+                sp.setMaSP(rs.getInt(1));
+                sp.setMaLoai(rs.getInt(2));
+                sp.setTenSP(rs.getString(3));
+                sp.setSoLuong(rs.getInt(4));
+                sp.setGiaSP(rs.getFloat(5));
+                sp.setIsDeleted(rs.getBoolean(6));
+
+                return sp;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

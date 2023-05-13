@@ -21,8 +21,8 @@ public class NhaCungCapDAO {
                 if (!rs.getBoolean(6)){
                     ncc.setMaNCC(rs.getInt(1));
                     ncc.setTenNCC(rs.getString(2));
-                    ncc.setDiaChi(rs.getString(3));
-                    ncc.setDienThoai(rs.getString(4));
+                    ncc.setDienThoai(rs.getString(3));
+                    ncc.setDiaChi(rs.getString(4));
                     ncc.setEmail(rs.getString(5));
                     dsncc.add(ncc);
                 }
@@ -44,8 +44,8 @@ public class NhaCungCapDAO {
                 if (!rs.getBoolean(6)){
                     ncc.setMaNCC(rs.getInt(1));
                     ncc.setTenNCC(rs.getString(2));
-                    ncc.setDiaChi(rs.getString(3));
-                    ncc.setDienThoai(rs.getString(4));
+                    ncc.setDienThoai(rs.getString(3));
+                    ncc.setDiaChi(rs.getString(4));
                     ncc.setEmail(rs.getString(5));
                 }
             }
@@ -57,7 +57,7 @@ public class NhaCungCapDAO {
 
     public boolean addNCC(NhaCungCap ncc) {
         try {
-            String sql = "INSERT INTO nhacungcap(TenNCC, DiaChi, SDT, Email, IsDeleted) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO nhacungcap(TenNCC, SDT, DiaChi, Email, IsDeleted) VALUES(?,?,?,?,?)";
             PreparedStatement prep = Connect.cnt().prepareStatement(sql);
             
             prep.setString(1, ncc.getTenNCC());
@@ -77,7 +77,7 @@ public class NhaCungCapDAO {
 
     public boolean updateNCC(NhaCungCap ncc) {
         try {
-            String sql = "UPDATE nhacungcap SET TenNCC=?, DiaChi=?, DienThoai=?, Email=?, IsDeleted=? WHERE MaNCC=?";
+            String sql = "UPDATE nhacungcap SET TenNCC=?, SDT=?, DiaChi=?, Email=?, IsDeleted=? WHERE MaNCC=?";
            PreparedStatement prep = Connect.cnt().prepareStatement(sql);
             
             prep.setString(1, ncc.getTenNCC());
@@ -85,6 +85,7 @@ public class NhaCungCapDAO {
             prep.setString(3, ncc.getDienThoai());
             prep.setString(4, ncc.getEmail());
             prep.setBoolean(5, ncc.getIsDeleted());
+            prep.setInt(6, ncc.getMaNCC());
             
             prep.execute();
             return true;
@@ -97,7 +98,7 @@ public class NhaCungCapDAO {
 
     public boolean deleteNCC(int maNCC) {
         try {
-            String sql = "UPDATE nhacungcap SET IsDeleted=1 WHERE MaLoai=" + maNCC;
+            String sql = "UPDATE nhacungcap SET IsDeleted=1 WHERE MaNCC=" + maNCC;
             Statement st = Connect.cnt().createStatement();
             
             st.execute(sql);
@@ -105,6 +106,17 @@ public class NhaCungCapDAO {
             return true;
         } catch (SQLException ex) {
             
+        }
+        return false;
+    }
+    
+    public boolean xoaAllNhaCungCap() {
+        try {
+            String sql = "DELETE FROM nhacungcap";
+            PreparedStatement pre = Connect.cnt().prepareStatement(sql);            
+            pre.execute();
+            return true;
+        } catch (SQLException e) {
         }
         return false;
     }
